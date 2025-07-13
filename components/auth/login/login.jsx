@@ -36,6 +36,21 @@ export default function LoginPage() {
 
       toast.success("Login successful!");
 
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+      const expires = new Date();
+      expires.setDate(expires.getDate() + 7);
+      const cookieOptions = `expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+      
+      document.cookie = `token=${userProfile.id}; ${cookieOptions}`;
+      document.cookie = `userRole=${userProfile.role}; ${cookieOptions}`;
+
+      console.log("Setting cookies:", {
+        token: userProfile.id,
+        userRole: userProfile.role
+      });
+
       const userData = {
         id: userProfile.id,
         email: userProfile.email,
@@ -45,14 +60,13 @@ export default function LoginPage() {
 
       localStorage.setItem("user", JSON.stringify(userData));
 
-      // Notify other tabs
       window.dispatchEvent(new Event("storage"));
 
       setTimeout(() => {
-        const role = userProfile.role;
-        if (role === "Admin") {
+        const role = userProfile.role.toLowerCase();
+        if (role === "admin") {
           router.push("/admin/dashboard");
-        } else if (role === "Delivery Agent") {
+        } else if (role === "delivery agent") {
           router.push("/agent/dashboard");
         } else {
           router.push("/customer/dashboard");

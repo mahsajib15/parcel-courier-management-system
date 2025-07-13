@@ -1,10 +1,19 @@
-import AdminDashboard from '@/components/rolesDashboard/AdminDashboard'
-import React from 'react'
+'use client'
+import UnifiedDashboard from '@/components/rolesDashboard/UnifiedDashboard';
 
-export default function page() {
-  return (
-    <div>
-      <AdminDashboard />
-    </div>
-  )
-}
+const AdminDashboardPage = () => {
+  return <UnifiedDashboard />;
+};
+
+export default AdminDashboardPage;
+
+
+// import React from 'react'
+
+// export default function page() {
+//   return (
+//     <div>
+//       <AdminDashboard />
+//     </div>
+//   )
+// }

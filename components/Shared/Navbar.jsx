@@ -12,7 +12,6 @@ export default function Navbar() {
   useEffect(() => {
     const checkUser = () => {
       const userData = localStorage.getItem("user");
-      console.log(userData);
       if (userData) {
         setUser(JSON.parse(userData));
       }
@@ -20,21 +19,21 @@ export default function Navbar() {
 
     checkUser();
 
-    // Listen for login/logout across tabs
     window.addEventListener("storage", checkUser);
     return () => window.removeEventListener("storage", checkUser);
   }, []);
 
   const handleLogout = () => {
-    // Clear localStorage only (no cookies)
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    document.cookie = 'userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+
     localStorage.removeItem('user');
     setUser(null);
     router.push('/auth/login');
   };
 
-  // Generate role-based dashboard path
   let dashboardPath = "#";
-  const role = user?.role;
+  const role = user?.role?.toLowerCase();
   if (role === "admin") {
     dashboardPath = "/admin/dashboard";
   } else if (role === "customer") {
@@ -56,7 +55,7 @@ export default function Navbar() {
           {/* Role-based Dashboard button */}
           {user && user.role && (
             <Link href={dashboardPath}>
-              <button className="bg-green-600 hover:bg-green-500 text-white cursor-pointer px-3 py-1 rounded">
+              <button className="bg-green-600 hover:bg-green-500 text-white cursor-po px-3 py-1 rounded">
                 Go to Dashboard
               </button>
             </Link>

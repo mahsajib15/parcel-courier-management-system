@@ -9,7 +9,7 @@ export default function AdminLayout({ children }) {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user') || 'null');
-    if (!user || user.role !== 'Admin') {
+    if (!user || user.role !== 'admin') {
       router.push('/auth/login');
     }
   }, []);
@@ -95,8 +95,8 @@ export default function AdminLayout({ children }) {
           </ul>
         </nav>
         
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="bg-blue-700 rounded-lg p-3 text-center">
+        <div className="absolute bottom-4 left-8 w-64 justify-center">
+          <div className="bg-red-700 rounded-lg p-3 text-center">
             <p className="text-xs text-blue-200">System Status: Online</p>
           </div>
         </div>

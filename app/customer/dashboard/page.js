@@ -1,10 +1,19 @@
-import CustomerDashboard from '@/components/rolesDashboard/CustomerDashboard'
-import React from 'react'
+'use client'
+import UnifiedDashboard from '@/components/rolesDashboard/UnifiedDashboard';
 
-export default function page() {
-  return (
-    <div>
-      <CustomerDashboard />
-    </div>
-  )
-}
+const CustomerDashboardPage = () => {
+  return <UnifiedDashboard />;
+};
+
+export default CustomerDashboardPage;
+
+
+// import React from 'react'
+
+// export default function page() {
+//   return (
+//     <div>
+//       <CustomerDashboard />
+//     </div>
+//   )
+// }
